@@ -55,7 +55,7 @@ export default {
       this.products = data;
     },
   },
-  mounted() { 
+  mounted() {
     axios
       .get("http://localhost:3000/best-products")
       .then((response) => this.setProducts(response.data))
