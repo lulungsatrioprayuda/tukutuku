@@ -11,9 +11,9 @@
                 <br />ada di Gadetmu!
               </h2>
               <p>Tunggu apalagi? ambil hp Anda, lalu pesan makanan lezatnya</p>
-              <button class="btn btn-success">
+              <router-link class="btn btn-success" to="/Foods">
                 <b-icon-arrow-right />&nbsp;Pesan
-              </button>
+              </router-link>
             </div>
           </div>
         </div>
