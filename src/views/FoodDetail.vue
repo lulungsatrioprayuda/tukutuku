@@ -39,7 +39,7 @@
                   <label for="keterangan">Keterangan</label>
                   <textarea class="form-control" name="" placeholder="Keterangan contoh : Nasi sedikit, Tidak usah lauk"></textarea>
               </div>
-              <button type="submit" class="btn btn-success"><b-icon-cart></b-icon-cart>Pesan</button>
+              <button type="submit" class="btn btn-success"><b-icon-cart></b-icon-cart> Pesan</button>
           </form>
         </div>
       </div>
