@@ -22,12 +22,13 @@
       <!-- foodDetail -->
       <div class="row">
         <div class="col-md-6">
-          <!-- <img :src="require(`../assets/image/${product.gambar}`)" alt=""> -->
+          <img :src="'../assets/images/'+product.gambar" class="img-fluid shadow" alt="">
         </div>
         <div class="col-md-6">
           <h2>
             <strong>{{ product.nama }}</strong>
           </h2>
+          <h4>Harga : <strong>Rp. {{product.harga}}</strong></h4>
         </div>
       </div>
     </div>
