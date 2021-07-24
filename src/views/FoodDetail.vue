@@ -20,7 +20,7 @@
       </div>
 
       <!-- foodDetail -->
-      <div class="row">
+      <div class="row mt-3">
         <div class="col-md-6">
           <img :src="'../assets/images/'+product.gambar" class="img-fluid shadow" alt="">
         </div>
@@ -28,7 +28,19 @@
           <h2>
             <strong>{{ product.nama }}</strong>
           </h2>
+          <hr>
           <h4>Harga : <strong>Rp. {{product.harga}}</strong></h4>
+          <form class="mt-4">
+              <div class="form-group">
+                  <label for="jumlah_pemesanan">Jumlah Pesan</label>
+                  <input type="number" class="form-control" >
+              </div>
+              <div class="form-group">
+                  <label for="keterangan">Keterangan</label>
+                  <textarea class="form-control" name="" placeholder="Keterangan contoh : Nasi sedikit, Tidak usah lauk"></textarea>
+              </div>
+              <button type="submit" class="btn btn-success"><b-icon-cart></b-icon-cart> Pesan</button>
+          </form>
         </div>
       </div>
     </div>
