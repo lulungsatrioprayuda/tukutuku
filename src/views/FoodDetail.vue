@@ -86,18 +86,28 @@ export default {
       this.product = data;
     },
     pemesanan() {
-      this.pesan.products = this.product;
-      axios
-        .post("http://localhost:3000/keranjangs", this.pesan)
-        .then(() => {
-          this.$toast.success("Sukses Menambahkan Makanan.", {
-            type: 'success',
-            position: 'top-right',
-            duration: 3000,
-            dismissible: true
-          });
-        })
-        .catch((err) => console.log(err));
+      if (this.pesan.jumlah_pemesanan) {
+        this.pesan.products = this.product;
+        axios
+          .post("http://localhost:3000/keranjangs", this.pesan)
+          .then(() => {
+            // ini untuk alert toast
+            this.$toast.success("Sukses Menambahkan Makanan.", {
+              type: "success",
+              position: "top-right",
+              duration: 3000,
+              dismissible: true,
+            });
+          })
+          .catch((err) => console.log(err));
+      } else {
+        this.$toast.error("Jumlah Pesanan Harus Diisi.", {
+          type: "error",
+          position: "top-right",
+          duration: 3000,
+          dismissible: true,
+        });
+      }
     },
   },
   mounted() {
