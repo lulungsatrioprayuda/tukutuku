@@ -28,7 +28,7 @@
             <router-link class="nav-link" to="/keranjang">
               Cart
               <b-icon-bag></b-icon-bag>
-              <span class="badge badge-success ml-2">{{jumlah_pesanans.length}}</span>
+              <span class="badge badge-success ml-2">{{updateKeranjang ? updateKeranjang.length : jumlah_pesanans.length}}</span>
             </router-link>
           </li>
         </ul>
@@ -47,10 +47,18 @@ export default {
       jumlah_pesanans: []
     }
   },
+  props: ['updateKeranjang'],
   methods: {
     setJumlah(data) {
       this.jumlah_pesanans = data
+
+      // method ke 2 untuk update realtime jumlah keranjang
+    //       axios
+    // .get("http://localhost:3000/keranjangs")
+    // .then((response) => this.setJumlah(response.data))
+    // .catch((error) => console.log(error))
     }
+    
   },
   mounted(){
     axios
