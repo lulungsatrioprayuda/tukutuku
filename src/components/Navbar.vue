@@ -25,7 +25,7 @@
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/cart">
+            <router-link class="nav-link" to="/keranjang">
               Cart
               <b-icon-bag></b-icon-bag>
               <span class="badge badge-success ml-2">{{jumlah_pesanans.length}}</span>
