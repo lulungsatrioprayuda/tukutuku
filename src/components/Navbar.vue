@@ -1,40 +1,39 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-      <a class="navbar-brand" href="#">tukutuku</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <div>
+    <b-navbar toggleable="lg" type="light">
+      <div class="container">
+        <b-navbar-brand href="#">Tukutuku</b-navbar-brand>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <router-link class="nav-link" to="/">Home</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/Foods">Foods</router-link>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <router-link class="nav-link" to="/keranjang">
-              Cart
-              <b-icon-bag></b-icon-bag>
-              <span class="badge badge-success ml-2">{{updateKeranjang ? updateKeranjang.length : jumlah_pesanans.length}}</span>
-            </router-link>
-          </li>
-        </ul>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/">Home</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/Foods">Foods</router-link>
+            </li>
+          </b-navbar-nav>
+
+          <!-- Right aligned nav items -->
+          <b-navbar-nav class="ml-auto">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/keranjang">
+                Cart
+                <b-icon-bag></b-icon-bag>
+                <span class="badge badge-success ml-2">{{
+                  updateKeranjang
+                    ? updateKeranjang.length
+                    : jumlah_pesanans.length
+                }}</span>
+              </router-link>
+            </li>
+          </b-navbar-nav>
+        </b-collapse>
       </div>
-    </div>
-  </nav>
+    </b-navbar>
+  </div>
 </template>
 
 <script>
@@ -44,28 +43,27 @@ export default {
   name: "Navbar",
   data() {
     return {
-      jumlah_pesanans: []
-    }
+      jumlah_pesanans: [],
+    };
   },
-  props: ['updateKeranjang'],
+  props: ["updateKeranjang"],
   methods: {
     setJumlah(data) {
-      this.jumlah_pesanans = data
+      this.jumlah_pesanans = data;
 
       // method ke 2 untuk update realtime jumlah keranjang
-    //       axios
-    // .get("http://localhost:3000/keranjangs")
-    // .then((response) => this.setJumlah(response.data))
-    // .catch((error) => console.log(error))
-    }
-    
+      //       axios
+      // .get("http://localhost:3000/keranjangs")
+      // .then((response) => this.setJumlah(response.data))
+      // .catch((error) => console.log(error))
+    },
   },
-  mounted(){
+  mounted() {
     axios
-    .get("http://localhost:3000/keranjangs")
-    .then((response) => this.setJumlah(response.data))
-    .catch((error) => console.log(error))
-  }
+      .get("http://localhost:3000/keranjangs")
+      .then((response) => this.setJumlah(response.data))
+      .catch((error) => console.log(error));
+  },
 };
 </script>
 

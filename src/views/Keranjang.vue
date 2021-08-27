@@ -74,6 +74,11 @@
           </div>
         </div>
       </div>
+
+      <!-- Form Checkout -->
+      <div class="row justify-content-end">
+        
+      </div>
     </div>
   </div>
 </template>
