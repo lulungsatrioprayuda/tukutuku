@@ -126,7 +126,7 @@ export default {
   data() {
     return {
       keranjangs: [],
-      pesan: [],
+      pesan: {},
     };
   },
   methods: {
@@ -154,9 +154,15 @@ export default {
     checkout() {
       if (this.pesan.nama && this.pesan.noMeja) {
         this.pesan.keranjangs = this.keranjangs;
-        axios
-        .post("http://localhost:3000/pesanans", this.pesan)
-        .then(() => {
+
+        this.keranjangs.map(function (item) {
+          // Hapus semua keranjang
+          return axios
+            .delete("http://localhost:3000/keranjangs/" + item.id)
+            .catch((error) => console.log(error));
+        });
+
+        axios.post("http://localhost:3000/pesanans", this.pesan).then(() => {
           this.$router.push({ path: "/pesanan-sukses" });
           // ini untuk alert toast
           this.$toast.success("Makanan telah dipesan", {

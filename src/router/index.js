@@ -29,9 +29,9 @@ const routes = [{
     component: Keranjang
   },
   {
-    path: '/keranjang',
-    name: 'Kerangjang',
-    component: Keranjang
+    path: '/pesanan-sukses',
+    name: 'PesananSukses',
+    component: PesananSukses
   },
   {
     path: '/about',
