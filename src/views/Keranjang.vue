@@ -1,6 +1,6 @@
 <template>
   <div class="keranjang">
-    <Navbar :updateKeranjang="keranjangs"/>
+    <Navbar :updateKeranjang="keranjangs" />
     <div class="container">
       <!-- breadcrumb -->
       <div class="row mt-4">
@@ -49,23 +49,33 @@
                       width="250"
                     />
                   </td>
-                  <td><strong>{{keranjang.products.nama}}</strong></td>
-                  <td>{{keranjang.keterangan ? keranjang.keterangan : "-"}}</td>
-                  <td>{{keranjang.jumlah_pemesanan}}</td>
-                  <td align="right">Rp.{{keranjang.products.harga}}</td>
-                  <td align="right"><strong> Rp.{{keranjang.jumlah_pemesanan * keranjang.products.harga}}</strong></td>
+                  <td>
+                    <strong>{{ keranjang.products.nama }}</strong>
+                  </td>
+                  <td>
+                    {{ keranjang.keterangan ? keranjang.keterangan : "-" }}
+                  </td>
+                  <td>{{ keranjang.jumlah_pemesanan }}</td>
+                  <td align="right">Rp.{{ keranjang.products.harga }}</td>
+                  <td align="right">
+                    <strong>
+                      Rp.{{
+                        keranjang.jumlah_pemesanan * keranjang.products.harga
+                      }}</strong
+                    >
+                  </td>
                   <td align="center" class="text-danger">
-                    <b-icon-trash @click="hapusKeranjang(keranjang.id)"></b-icon-trash>
+                    <b-icon-trash
+                      @click="hapusKeranjang(keranjang.id)"
+                    ></b-icon-trash>
                   </td>
                 </tr>
                 <tr>
-                  <td colspan="6" align=right>
+                  <td colspan="6" align="right">
                     <strong>total harga: </strong>
                   </td>
                   <td align="right">
-                    <strong>
-                      Rp.{{totalHarga}}
-                    </strong>
+                    <strong> Rp.{{ totalHarga }} </strong>
                   </td>
                   <td></td>
                 </tr>
@@ -77,7 +87,28 @@
 
       <!-- Form Checkout -->
       <div class="row justify-content-end">
-        
+        <div class="col-md-4">
+          <form class="mt-4" v-on:submit.prevent>
+            <div class="form-group">
+              <label for="nama">Nama</label>
+              <!-- v model bisa di bilang untuk mendaftarkan sebuah inputan kedalam data yang bernama pesanan, untuk jumlah_pemesanan itu adalah nama bebas seperti nama di adalam property "name" pada inputan -->
+              <input type="text" class="form-control" v-model="pesan.nama" />
+            </div>
+            <div class="form-group">
+              <label for="noMeja">Nomor Meja :</label>
+              <!-- v model bisa di bilang untuk mendaftarkan sebuah inputan kedalam data yang bernama pesanan, untuk jumlah_pemesanan itu adalah nama bebas seperti nama di adalam property "name" pada inputan -->
+              <input type="text" class="form-control" v-model="pesan.noMeja" />
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-success float-right"
+              @click="checkout"
+            >
+              <b-icon-cart></b-icon-cart> Pesan
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -95,31 +126,43 @@ export default {
   data() {
     return {
       keranjangs: [],
+      pesan: [],
     };
   },
   methods: {
     setKeranjangs(data) {
       this.keranjangs = data;
     },
-    hapusKeranjang(id){
+    hapusKeranjang(id) {
       axios
-      .delete("http://localhost:3000/keranjangs/"+id)
-      .then(() => {
-        this.$toast.error("Makanan telah di hapus.", {
+        .delete("http://localhost:3000/keranjangs/" + id)
+        .then(() => {
+          this.$toast.error("Makanan telah di hapus.", {
+            type: "error",
+            position: "top-right",
+            duration: 3000,
+            dismissible: true,
+          });
+
+          axios
+            .get("http://localhost:3000/keranjangs")
+            .then((response) => this.setKeranjangs(response.data))
+            .catch((error) => console.log(error));
+        })
+        .catch((error) => console.log(error));
+    },
+    checkout() {
+      if (this.pesan.nama && this.pesan.noMeja) {
+        console.log("kontol");
+      } else {
+        this.$toast.error("Nama dan No Meja Harus diisi!.", {
           type: "error",
           position: "top-right",
           duration: 3000,
           dismissible: true,
         });
-    
-    axios
-      .get("http://localhost:3000/keranjangs")
-      .then((response) => this.setKeranjangs(response.data))
-      .catch((error) => console.log(error));
-        
-      })
-      .catch((error) => console.log(error));
-    }
+      }
+    },
   },
   mounted() {
     axios
@@ -129,11 +172,11 @@ export default {
   },
   computed: {
     totalHarga() {
-      return this.keranjangs.reduce(function(items, data){
-        return items+(data.products.harga * data.jumlah_pemesanan)
-      }, 0)
-    }
-  }
+      return this.keranjangs.reduce(function (items, data) {
+        return items + data.products.harga * data.jumlah_pemesanan;
+      }, 0);
+    },
+  },
 };
 </script>
 
