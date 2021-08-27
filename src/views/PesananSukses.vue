@@ -1,7 +1,15 @@
 <template>
   <div class="container">
         <Navbar />
-    <h2>Pesanan Sukses</h2>
+        <div class="container">
+          <div class="row justify-content-center mt-5">
+            <div class="col text-center">
+              <img src="../assets/images/menunggu.png" width="300">
+              <h2><strong>Success!</strong></h2>
+              <h4>Pesanan anda segera disajikan, <br> Mohon sabar...</h4>
+            </div>
+          </div>
+        </div>
   </div>
 </template>
 
