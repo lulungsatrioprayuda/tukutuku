@@ -153,7 +153,19 @@ export default {
     },
     checkout() {
       if (this.pesan.nama && this.pesan.noMeja) {
-        console.log("kontol");
+        this.pesan.keranjangs = this.keranjangs;
+        axios
+        .post("http://localhost:3000/pesanans", this.pesan)
+        .then(() => {
+          this.$router.push({ path: "/pesanan-sukses" });
+          // ini untuk alert toast
+          this.$toast.success("Makanan telah dipesan", {
+            type: "success",
+            position: "top-right",
+            duration: 3000,
+            dismissible: true,
+          });
+        });
       } else {
         this.$toast.error("Nama dan No Meja Harus diisi!.", {
           type: "error",
